@@ -27,4 +27,9 @@ class StringCalculatorShould {
         StringCalculator stringCalculator = new StringCalculator();
         assertEquals(6, stringCalculator.add("1\n2,3"));
     }
+    @Test
+    public void supportDifferentDelimiter() {
+        StringCalculator stringCalculator = new StringCalculator();
+        assertEquals(4, stringCalculator.add("//;\n1;3"));
+    }
 }
