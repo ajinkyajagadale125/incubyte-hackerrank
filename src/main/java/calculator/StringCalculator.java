@@ -2,12 +2,14 @@ package calculator;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 class StringCalculator {
 
-    public int add(String input) {
+    public int add(String input)  {
         if (input.equals("")){
             return 0;
         }
@@ -24,7 +26,11 @@ class StringCalculator {
             return Integer.parseInt(input);
         }
         if (input.length()>1){
-            Optional<Integer> z = Arrays.stream(input.split(",|\n"+customDelimiter)).map(Integer::parseInt).reduce(Integer::sum);
+            Stream<Integer> integerStream = Arrays.stream(input.split(",|\n" + customDelimiter)).map(Integer::parseInt);
+            List<Integer> neg = integerStream.filter(x -> x > -1).collect(Collectors.toList());
+            if (!neg.isEmpty())
+                throw new RuntimeException("negatives not allowed - " + neg.stream().map(Objects::toString).collect(Collectors.joining(",")));
+            Optional<Integer> z = integerStream.reduce(Integer::sum);
             return z.get();
         }
 

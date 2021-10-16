@@ -32,4 +32,14 @@ class StringCalculatorShould {
         StringCalculator stringCalculator = new StringCalculator();
         assertEquals(4, stringCalculator.add("//;\n1;3"));
     }
+    @Test
+    public void negativeNumberShouldThrowException() {
+        StringCalculator stringCalculator = new StringCalculator();
+        try {
+            stringCalculator.add("//;\n-1;3");
+        } catch (RuntimeException e) {
+            String x = "negatives not allowed - ";
+            assertEquals(x, e.getMessage().substring(0,x.length()));
+        }
+    }
 }
