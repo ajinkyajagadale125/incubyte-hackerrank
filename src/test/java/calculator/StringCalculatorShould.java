@@ -42,4 +42,10 @@ class StringCalculatorShould {
             assertEquals(x, e.getMessage().substring(0,x.length()));
         }
     }
+    @Test
+    public void getAddCalledCount() {
+        StringCalculator stringCalculator = new StringCalculator();
+        stringCalculator.add("//;\n1;3");
+        assertEquals(1, stringCalculator.getCalledCount());
+    }
 }

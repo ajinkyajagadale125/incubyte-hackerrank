@@ -9,7 +9,9 @@ import java.util.stream.Stream;
 
 class StringCalculator {
 
+    int calledCount=0;
     public int add(String input)  {
+        calledCount++;
         if (input.equals("")){
             return 0;
         }
@@ -36,6 +38,9 @@ class StringCalculator {
 
 
         return 0;
+    }
+    public int getCalledCount(){
+        return this.calledCount;
     }
 
 }
