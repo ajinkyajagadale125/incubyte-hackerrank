@@ -15,7 +15,7 @@ class StringCalculator {
             return Integer.parseInt(input);
         }
         if (input.length()>1){
-            Optional<Integer> z = Arrays.stream(input.split(",")).map(Integer::parseInt).reduce(Integer::sum);
+            Optional<Integer> z = Arrays.stream(input.split(",|\n")).map(Integer::parseInt).reduce(Integer::sum);
             return z.get();
         }
 
