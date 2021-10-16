@@ -29,10 +29,10 @@ class StringCalculator {
         }
         if (input.length()>1){
             Stream<Integer> integerStream = Arrays.stream(input.split(",|\n" + customDelimiter)).map(Integer::parseInt);
-            List<Integer> neg = integerStream.filter(x -> x > -1).collect(Collectors.toList());
+            List<Integer> neg = integerStream.filter(x -> x < 0).collect(Collectors.toList());
             if (!neg.isEmpty())
                 throw new RuntimeException("negatives not allowed - " + neg.stream().map(Objects::toString).collect(Collectors.joining(",")));
-            Optional<Integer> z = integerStream.reduce(Integer::sum);
+            Optional<Integer> z = integerStream.filter(x->x<1001).reduce(Integer::sum);
             return z.get();
         }
 

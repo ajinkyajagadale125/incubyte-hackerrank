@@ -48,4 +48,9 @@ class StringCalculatorShould {
         stringCalculator.add("//;\n1;3");
         assertEquals(1, stringCalculator.getCalledCount());
     }
+    @Test
+    public void greaterThanThousandShouldIgnored() {
+        StringCalculator stringCalculator = new StringCalculator();
+        assertEquals(2, stringCalculator.add("2,1001"));
+    }
 }
