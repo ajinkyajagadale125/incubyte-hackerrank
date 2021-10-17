@@ -15,10 +15,10 @@ class StringCalculator {
         String customDelimiter="";
         if (input.startsWith("//")){
             String delimiterString = input.substring(2, input.indexOf("\n"));
-
+            List<String> delimiters = new ArrayList<>();
             if (delimiterString.contains("[")) {
                 Integer startIndex=null;
-                Integer endIndex = null;
+                Integer endIndex;
                 boolean flag=false;
                 for (int i = 0; i < delimiterString.length(); i++) {
                     if(delimiterString.charAt(i)=='[' && !flag){
@@ -28,11 +28,15 @@ class StringCalculator {
                     if(delimiterString.charAt(i)==']' && flag){
                         endIndex=i;
                         flag=false;
-                        
+
+                            delimiters.add(delimiterString.substring(startIndex + 1, endIndex));
+
+
                     }
                 }
-                if (startIndex!=null && endIndex!=null)
-                    customDelimiter+=delimiterString.substring(startIndex+1,endIndex);
+                customDelimiter+=String.join("|" , delimiters);
+
+
 
             }
             int newLineIndex = input.indexOf('\n');
