@@ -17,21 +17,25 @@ class StringCalculatorShould {
         StringCalculator stringCalculator = new StringCalculator();
         assertEquals(1, stringCalculator.add("1"));
     }
+
     @Test
-    public void sumOfTwoInteger(){
+    public void sumOfTwoInteger() {
         StringCalculator stringCalculator = new StringCalculator();
         assertEquals(3, stringCalculator.add("1,2"));
     }
+
     @Test
-    public void addNumbersWithNewLine(){
+    public void addNumbersWithNewLine() {
         StringCalculator stringCalculator = new StringCalculator();
         assertEquals(6, stringCalculator.add("1\n2,3"));
     }
+
     @Test
     public void supportDifferentDelimiter() {
         StringCalculator stringCalculator = new StringCalculator();
         assertEquals(4, stringCalculator.add("//;\n1;3"));
     }
+
     @Test
     public void negativeNumberShouldThrowException() {
         StringCalculator stringCalculator = new StringCalculator();
@@ -39,29 +43,39 @@ class StringCalculatorShould {
             stringCalculator.add("//;\n-1;3");
         } catch (RuntimeException e) {
             String x = "negatives not allowed - ";
-            assertEquals(x, e.getMessage().substring(0,x.length()));
+            assertEquals(x, e.getMessage().substring(0, x.length()));
         }
     }
+
     @Test
     public void getAddCalledCount() {
         StringCalculator stringCalculator = new StringCalculator();
         stringCalculator.add("//;\n1;3");
         assertEquals(1, stringCalculator.getCalledCount());
     }
+
     @Test
     public void greaterThanThousandShouldIgnored() {
         StringCalculator stringCalculator = new StringCalculator();
         assertEquals(2, stringCalculator.add("2,1001"));
     }
+
     @Test
-    public void delimiterShouldBeAnyLength(){
+    public void delimiterShouldBeAnyLength() {
         StringCalculator stringCalculator = new StringCalculator();
         assertEquals(6, stringCalculator.add("//[***]\n1***2***3"));
     }
+
     @Test
-    public void allowingMultipleDelimiters(){
+    public void allowingMultipleDelimiters() {
         StringCalculator stringCalculator = new StringCalculator();
         assertEquals(6, stringCalculator.add("//[*][%]\n1*2%3"));
+    }
+
+    @Test
+    public void multipleDelimitersMoreThanOneChar() {
+        StringCalculator stringCalculator = new StringCalculator();
+        assertEquals(6, stringCalculator.add("//[**][%%]\n1**2%%3"));
     }
 
 
