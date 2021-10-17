@@ -1,9 +1,6 @@
 package calculator;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -15,15 +12,34 @@ class StringCalculator {
         if (input.equals("")){
             return 0;
         }
-        String customDelimiter;
+        String customDelimiter="";
         if (input.startsWith("//")){
+            String delimiterString = input.substring(2, input.indexOf("\n"));
+
+            if (delimiterString.contains("[")) {
+                Integer startIndex=null;
+                Integer endIndex = null;
+                boolean flag=false;
+                for (int i = 0; i < delimiterString.length(); i++) {
+                    if(delimiterString.charAt(i)=='[' && !flag){
+                        startIndex=i;
+                        flag=true;
+                    }
+                    if(delimiterString.charAt(i)==']' && flag){
+                        endIndex=i;
+                        flag=false;
+                        
+                    }
+                }
+                if (startIndex!=null && endIndex!=null)
+                    customDelimiter+=delimiterString.substring(startIndex+1,endIndex);
+
+            }
             int newLineIndex = input.indexOf('\n');
             input = input.substring(newLineIndex + 1);
-            customDelimiter= String.valueOf(input.charAt(newLineIndex-1));
+            customDelimiter+= String.valueOf(input.charAt(newLineIndex-1));
         }
-        else {
-            customDelimiter="";
-        }
+
         if (input.length()==1){
             return Integer.parseInt(input);
         }
